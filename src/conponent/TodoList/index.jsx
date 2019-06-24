@@ -3,27 +3,27 @@ import axios from 'axios';
 import Input from './Input';
 import List from './List';
 import './TodoList.scss';
-const TodoList = () => {
 
+const TodoList = () => {
   const [list, setList] = useState({});
+
   useEffect(() => {
-    axios.get('http://localhost:3333/list/list').then(({data}) => {
+    axios.get('http://localhost:3333/list/list').then(({ data }) => {
       setList(data.list);
-    })
+    });
   }, []);
 
-  return(
-    <div id="body">
+  return (
+    <div className="body">
       <h1>Todo List</h1>
-      <List 
-      list={list} 
-      setList={setList}
+      <List
+        list={list}
+        setList={setList}
       />
-      <Input 
-      setList={setList}
+      <Input
+        setList={setList}
       />
     </div>
   );
 };
-
 export default TodoList;
