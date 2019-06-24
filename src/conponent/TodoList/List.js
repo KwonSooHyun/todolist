@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 const List = (props) => {
-  const { list, setList} = props;
+  const { list, setList } = props;
   
   const handleClick = (id) => {
     axios.delete('http://localhost:3333/list/', {
@@ -15,7 +15,6 @@ const List = (props) => {
       })
     );
   };
-  
   
   return(
     <div>
