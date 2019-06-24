@@ -5,11 +5,12 @@ import List from './List';
 import './TodoList.scss';
 
 const TodoList = () => {
-  const [list, setList] = useState({});
+  const [listAll, setListAll] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:3333/list/list').then(({ data }) => {
-      setList(data.list);
+      const { listData } = data;
+      setListAll([...listData]);
     });
   }, []);
 
@@ -17,11 +18,12 @@ const TodoList = () => {
     <div className="body">
       <h1>Todo List</h1>
       <List
-        list={list}
-        setList={setList}
+        listAll={listAll}
+        setListAll={setListAll}
       />
       <Input
-        setList={setList}
+        listAll={listAll}
+        setListAll={setListAll}
       />
     </div>
   );

@@ -3,27 +3,27 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 const List = (props) => {
-  const { list, setList } = props;
+  const { listAll, setListAll } = props;
 
   const handleClick = (id) => {
     axios.delete('http://localhost:3333/list/', {
       data: {
         id,
       },
-    }).then(() => axios.get('http://localhost:3333/list/list').then(({ data }) => {
-      setList(data.list);
-    }));
+    }).then(() => {
+      setListAll(listAll.filter(list => list.listId !== id));
+    });
   };
 
   return (
     <div>
-      {Object.keys(list).map(key => (
-        <li key={list[key].listId}>
-          {list[key].text}
+      {listAll.map(list => (
+        <li key={list.listId}>
+          {list.text}
           <button onClick={
             (e) => {
               e.preventDefault();
-              handleClick(list[key].listId)
+              handleClick(list.listId);
             }
           }
           >
@@ -36,8 +36,8 @@ const List = (props) => {
 };
 
 List.propTypes = {
-  list: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  setList: PropTypes.func,
+  listAll: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  setListAll: PropTypes.func,
 };
 
 export default List;
