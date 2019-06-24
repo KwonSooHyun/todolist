@@ -5,22 +5,26 @@ import List from './List';
 import './TodoList.scss';
 
 const TodoList = () => {
-  const [listAll, setListAll] = useState([]);
+  const [listAll, setListAll] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:3333/list/list').then(({ data }) => {
       const { listData } = data;
-      setListAll([...listData]);
+      setListAll(listData);
     });
   }, []);
 
   return (
     <div className="body">
       <h1>Todo List</h1>
-      <List
-        listAll={listAll}
-        setListAll={setListAll}
-      />
+      {listAll
+        ? (
+          <List
+            listAll={listAll}
+            setListAll={setListAll}
+          />
+        ) : (<strong>데이터 없음</strong>)}
+
       <Input
         listAll={listAll}
         setListAll={setListAll}

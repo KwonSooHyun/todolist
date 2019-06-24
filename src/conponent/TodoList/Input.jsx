@@ -10,10 +10,13 @@ const Input = (props) => {
     setText(e.target.value);
   };
   const handleClick = () => {
+    if (text === undefined || typeof text === 'string' || text === '') return alert('텍스트를 입력해주세요.');
     axios.put('http://localhost:3333/list/', {
       text,
     }).then((res) => {
       const { createList } = res.data;
+      if (createList === undefined || typeof createList !== 'object') return;
+      if (listAll === undefined || !Array.isArray(listAll)) return;
       setListAll([...listAll, createList]);
     });
   };
@@ -27,7 +30,12 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
-  listAll: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  listAll: PropTypes.arrayOf(
+    PropTypes.shape({
+      listId: PropTypes.number,
+      text: PropTypes.string,
+    }),
+  ),
   setListAll: PropTypes.func,
 };
 

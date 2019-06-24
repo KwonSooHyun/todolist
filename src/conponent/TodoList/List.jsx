@@ -6,11 +6,13 @@ const List = (props) => {
   const { listAll, setListAll } = props;
 
   const handleClick = (id) => {
+    if (id === undefined || typeof id !== 'number') return alert('삭제 실패!');
     axios.delete('http://localhost:3333/list/', {
       data: {
         id,
       },
     }).then(() => {
+      if (listAll === undefined || !Array.isArray(listAll)) return;
       setListAll(listAll.filter(list => list.listId !== id));
     });
   };
@@ -36,7 +38,12 @@ const List = (props) => {
 };
 
 List.propTypes = {
-  listAll: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+  listAll: PropTypes.arrayOf(
+    PropTypes.shape({
+      listId: PropTypes.number,
+      text: PropTypes.string,
+    }),
+  ),
   setListAll: PropTypes.func,
 };
 
