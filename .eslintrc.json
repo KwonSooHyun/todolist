@@ -1,0 +1,40 @@
+{
+  "extends": ["eslint:recommended", "airbnb"],
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/__tests__/**",
+          "**/__test__/**",
+          "**/*.stories.jsx"
+        ]
+      }
+    ],
+    "semi-spacing": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next|err" }],
+    "max-len": ["error", { "code": 160 }],
+    "linebreak-style": 0,
+    "no-alert": 0,
+    "no-restricted-globals": 0,
+
+    "react/destructuring-assignment": ["never", "always"],
+    "react/no-access-state-in-setstate": 0,
+    "react/button-has-type": ["never"],
+    "react/jsx-one-expression-per-line": ["never"],
+    "react/require-default-props": 0,
+
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": [0],
+    "jsx-a11y/label-has-for": ["never"],
+    "import/prefer-default-export": "off"
+  }
+}
