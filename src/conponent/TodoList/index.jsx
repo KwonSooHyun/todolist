@@ -10,6 +10,7 @@ const TodoList = () => {
   useEffect(() => {
     axios.get('http://localhost:3333/list/list').then(({ data }) => {
       const { listData } = data;
+      if (listData === undefined || !Array.isArray(listData)) return;
       setListAll(listData);
     });
   }, []);
